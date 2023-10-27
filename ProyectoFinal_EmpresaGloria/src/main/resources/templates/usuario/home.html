@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+        <title>Web Oficial de Leche Gloria, la leche que prefiere el Perú</title>
+        <meta content="" name="description">
+        <meta content="" name="keywords">
+
+        <!-- Icono de la Pagina -->
+        <link href="gloria-favicon.ico" rel="icon">
+        <link href="gloria-favicon.ico" rel="apple-touch-icon">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"/>
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/swiper@8/swiper-bundle.min.css"
+            />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+            />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+        <!-- Google Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,600,600i,700,700i|Satisfy|Comic+Neue:300,300i,400,400i,700,700i"
+            rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="style.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+
+        <!-- ======= Top Bar ======= -->
+        <section id="topbar" class="d-flex align-items-center fixed-top topbar-transparent">
+            <div class="container-fluid container-xl d-flex align-items-center justify-content-center justify-content-lg-start">
+                <i class="bi bi-phone d-flex align-items-center"><span>0800-1-4441</span></i>
+                <i class="bi bi-clock ms-4 d-none d-lg-flex align-items-center"><span>Lunes-Viernes: 8:00 AM - 6:00 PM / Sábado:
+                        8:00 AM - 12:00 PM</span></i>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <div th:if="${sesion==null}">
+            <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+                <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+                    <div class="logo me-auto">
+                        <h1><a th:href="@{/}"><img src="logo_gloria.png" style="padding: 0 10px;">Gloria</a></h1>
+                        <!-- Uncomment below if you prefer to use an image logo -->
+                        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+                    </div>
+
+                    <nav id="navbar" class="navbar order-last order-lg-0">
+                        <ul>
+                            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                            <li><a class="nav-link scrollto" href="#about">Acerca de</a></li>
+                            <li><a class="nav-link scrollto" href="#gallery">Galeria</a></li>
+                            <li><a class="nav-link scrollto" href="#events">Eventos</a></li>
+                            <li><a class="nav-link scrollto" href="#chefs">Empleados</a></li>
+                            <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
+                        </ul>
+                        <i class="bi bi-list mobile-nav-toggle"></i>
+                    </nav><!-- .navbar -->
+                    <a th:href="@{/getCart}" class="book-a-table-btn scrollto"><i class="bi bi-cart2"></i>Carrito</a>
+                    <a th:href="@{/usuario/login}" class="book-a-table-btn scrollto"><i class="bi bi-person-plus"></i>Sign In</a>
+                </div>
+            </header><!-- End Header -->
+        </div>
+
+        <div  th:unless="${sesion==null}"> 
+            <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+                <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+                    <div class="logo me-auto">
+                        <h1><a th:href="@{/}"><img src="logo_gloria.png" style="padding: 0 10px;">Gloria</a></h1>
+                        <!-- Uncomment below if you prefer to use an image logo -->
+                        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+                    </div>
+
+                    <nav id="navbar" class="navbar order-last order-lg-0">
+                        <ul>
+                            <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                            <li><a class="nav-link scrollto" href="#about">Acerca de</a></li>
+                            <li><a class="nav-link scrollto" href="#gallery">Galeria</a></li>
+                            <li><a class="nav-link scrollto" href="#events">Eventos</a></li>
+                            <li><a class="nav-link scrollto" href="#chefs">Empleados</a></li>
+                            <li><a class="nav-link scrollto" href="#contact">Contactenos</a></li>
+                            <li class="dropdown"><a href="#"><i class="bi bi-person-check-fill"></i><span>Usuario Activo</span> <i class="bi bi-chevron-down"></i></a>
+                                <ul>
+                                    <li><a th:href="@{/usuario/compras}">Compras</a></li>
+                                    <li><a th:href="@{/getCart}">Carrito</a></li>
+                                    <li><a th:href="@{/usuario/cerrar}">Cerrar Sesion</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <i class="bi bi-list mobile-nav-toggle"></i>
+                    </nav><!-- .navbar -->
+                </div>
+            </header><!-- End Header -->
+        </div>
+
+        <!-- ======= Hero Section ======= -->
+        <section id="hero">
+            <div class="hero-container">
+                <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+                    <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+                    <div class="carousel-inner" role="listbox">
+
+                        <!-- Slide 1 -->
+                        <div class="carousel-item active" style="background-image: url(banner-principal.jpg);">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2 class="animate__animated animate__fadeInDown"><span>Delicious</span> Productos Lacteos</h2>
+                                    <p class="animate__animated animate__fadeInUp">En Gloria estamos comprometidos con el bienestar de tu familia. Por ello, trabajamos para producir alimentos ricos,
+                                        saludables y nutritivos, generando impacto positivo en nuestra sociedad y cuidando el medioambiente.</p>
+                                    <div>
+                                        <a href="#portfolio" class="btn-menu animate__animated animate__fadeInUp scrollto">Nuestros Productos</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="carousel-item" style="background-image: url(banner-2.jpg);">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2 class="animate__animated animate__fadeInDown">Gracias por tu preferencia</h2>
+                                    <p class="animate__animated animate__fadeInUp">Por la confianza que genera trabajar con alimentos dirigidos al fortalecimiento de las bases nutricionales de los más pequeños y reforzar, en todo el ciclo de la vida, la alimentación balanceada que merecemos.</p>
+                                    <div>
+                                        <a href="#portfolio" class="btn-menu animate__animated animate__fadeInUp scrollto">Nuestros Productos</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="carousel-item" style="background-image: url(banner-3.jpg);">
+                            <div class="carousel-container">
+                                <div class="carousel-content">
+                                    <h2 class="animate__animated animate__fadeInDown">Delicioso sabor que nutre</h2>
+                                    <p class="animate__animated animate__fadeInUp">Por el lazo permanente y firme que une la nutrición y las enseñanzas de mamá en nuestra niñez.</p>
+                                    <div>
+                                        <a href="#portfolio" class="btn-menu animate__animated animate__fadeInUp scrollto">Nuestros Productos</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+                    </a>
+
+                    <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+                    </a>
+
+                </div>
+            </div>
+        </section><!-- End Hero -->
+
+        <!-- ======= About Section ======= -->
+        <section id="about" class="about">
+            <div class="container-fluid">
+
+                <div class="row">
+
+                    <div class="col-lg-5 align-items-stretch video-box"
+                         style='background-image: url("acerca\ de\ -\ imagen.webp");'>
+                        <a href="https://youtu.be/LD9SkV5rv7M" class="venobox play-btn mb-4" data-vbtype="video"
+                           data-autoplay="true"></a>
+                    </div>
+
+                    <div class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch">
+
+                        <div class="content">
+                            <h3>Nuestra Historia - <strong>Quienes Somos</strong></h3>
+                            <p>
+                                Somos la empresa líder en el mercado lácteo peruano. Nuestro trabajo sostenido y
+                                esforzado a lo largo de casi ochenta años, nos ha ubicado entre las organizaciones más admiradas y nos
+                                ha permitido ser poseedores de la marca peruana más valiosa y de mayor recordación en nuestro país.
+                            </p>
+                            <h3>Vision</h3>
+                            <ul>
+                                <li><i class="bx bx-check-double"></i>Ser la mejor empresa de alimentos en Latinoamérica, reconocida por
+                                    nuestro aporte a la nutrición, sustentabilidad, innovación y desarrollo de talento de nuestros
+                                    colaboradores.</li>
+                            </ul>
+                            <h3>Mision</h3>
+                            <ul>
+                                <li><i class="bx bx-check-double"></i>Desarrollar los mercados de alimentos con productos ricos,
+                                    nutritivos y accesibles, de forma eficiente y sustentable, asegurando la calidad, el cuidado de las
+                                    personas y un futuro más saludable.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End About Section -->
+
+
+        <!-- Page Content -->
+        <!-- Page Content -->
+        <section id="portfolio" class="portfolio">
+            <div class="container">
+                <!-- Jumbotron Header -->
+                <header class="jumbotron my-4">
+                    <h1 class="display-3 text-product">Bienvenido a la seccion de Productos</h1>
+                    <p class="lead text-tienda">Gloria es la marca mas elegida por los peruanos</p>
+                </header>
+
+                <form th:action="@{/buscarProducto}" method="POST" class="d-flex" role="search" style="width: 50%; margin: auto;" >
+                    <input class="form-control me-1" type="search" name="nombre" id="nombre" placeholder="Ingrese el nombre del producto a buscar" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit" style="display: flex"><i class="bi bi-search"></i>Buscar Producto</button>
+                </form>
+
+                <div class="row portfolio-container">
+
+                    <div class="col-lg-4 col-md-6 portfolio-item" style="text-align: center;" th:each="producto: ${productos}">
+                        <img th:src="@{/images/{img} (img=${producto.imagen})} " class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4 th:text="${producto.nombre}"></h4>
+                            <h4 th:text="${producto.descripcion}"></h4>
+                            <a th:href="@{/images/{img} (img=${producto.imagen})}" th:title= "${producto.nombre}" data-gallery="portfolioGallery"
+                               class="portfolio-lightbox preview-link"><i class="bx bx-plus"></i></a>
+                            <a th:href="@{/productohome/{id}  (id=${producto.id})  }" class="verproducto"><i class="bi bi-bag-check-fill"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======= Events Section ======= -->
+        <section id="events" class="events">
+            <div class="container">
+
+                <div class="section-title">
+                    <h2>Conoce algunas <span>iniciativas</span> de la Empresa</h2>
+                </div>
+
+                <!-- Noticia 1 -->
+                <div class="events-slider swiper">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <div class="row event-item">
+                                <div class="col-lg-6">
+                                    <img src="noticia1.png" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                    <h3>¿Cómo los productos lácteos elevan tus defensas?</h3>
+                                    <div class="price">
+                                        <p><span>Un aliado poderoso</span></p>
+                                    </div>
+                                    <p class="fst-italic">
+                                        El encargado de nuestra proteccion en el cuerpo humana es el sistema inmunitario, que, al igual que
+                                        el resto del
+                                        cuerpo, depende de una buena nutricion para un optimo funcionamiento.
+                                    </p>
+                                    <ul>
+                                        <li><i class="bi bi-check-circle"></i> Un vaso de leche o yogurt al dia hace la diferencia.</li>
+                                        <li><i class="bi bi-check-circle"></i> Los productos lacteos te hacen mas fuerte y saludable.</li>
+                                        <li><i class="bi bi-check-circle"></i> El yogurt contiene probioticos que ayudan a prevenir
+                                            enfermedades.</li>
+                                        <li><i class="bi bi-check-circle"></i> Los prductos lacteos ayudan al sistema inmunitario.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <!-- Noticia 2 -->
+                        <div class="swiper-slide">
+                            <div class="row event-item">
+                                <div class="col-lg-6">
+                                    <img src="noticia2.png" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                    <h3>El cuidado de nuestra gente es primero</h3>
+                                    <div class="price">
+                                        <p><span>La seguridad es primero</span></p>
+                                    </div>
+                                    <p class="fst-italic">
+                                        En un momento en la historia donde teniamos que quedarnos en casa, hubo trabajadores que no pararon.
+                                        Para ellos, salir a trabajar era un riesgo, por lo que tenian que hacerlo con todas las medidas de
+                                        bioseguridad.
+                                    </p>
+                                    <ul>
+                                        <li><i class="bi bi-check-circle"></i> La prioridad de Gloria es resguardar la salud de todos.</li>
+                                        <li><i class="bi bi-check-circle"></i> Convertieron sus oficinas tradicionales en espacios
+                                            colaborativos ecoamigables.
+                                        </li>
+                                        <li><i class="bi bi-check-circle"></i> Gloria brindo un espacio de vacunacion para sus empleados.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <!-- Noticia 3 -->
+                        <div class="swiper-slide">
+                            <div class="row event-item">
+                                <div class="col-lg-6">
+                                    <img src="noticia 3.jpg" class="img-fluid" alt="">
+                                </div>
+                                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                                    <h3>Juntos Podemos Mas</h3>
+                                    <div class="price">
+                                        <p><span>Hombro a Hombro</span></p>
+                                    </div>
+                                    <p class="fst-italic">
+                                        El compromiso de Leche Gloria es estar donde más nos necesitan. El agua es fundamental y más aún en
+                                        la situación de la pandemia. Es por eso que se realizo un esfuerzo, el cual consistio, en llevar 30
+                                        mil
+                                        litros de agua cada día y mitigar la situación que atravesaban las familias en San Juan de
+                                        Lurigancho, menciono Juan Carlos Belaunde, Director de Asuntos Corporativos Leche Gloria S.A.
+                                    </p>
+                                    <ul>
+                                        <li><i class="bi bi-check-circle"></i> ¡Unidos podemos ayudar a más peruanos!</li>
+                                        <li><i class="bi bi-check-circle"></i> Casi todas las cosas buenas nacen de una actitud de aprecio
+                                            por lo demás</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+            </div>
+        </section><!-- End Events Section -->
+
+        <!-- ======= Gallery Section ======= -->
+        <section id="gallery" style="padding-bottom: 50px;" class="gallery">
+            <div class="container-fluid">
+
+                <div class="section-title">
+                    <h2>Algunas fotos de <span>Nuestra Empresa</span></h2>
+                    <p>El trabajo en equipo es la habilidad para trabajar juntos hacia una vision comun. Es el combustible
+                        que permite a la gente comun conseguir resultados pocos comunes.</p>
+                </div>
+
+                <div class="row g-0">
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="instalaciones1.jpg" class="gallery-lightbox">
+                                <img src="instalaciones1.jpg" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="instalaciones2.jpg" class="gallery-lightbox">
+                                <img src="instalaciones2.jpg" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="instalaciones3.jpg" class="gallery-lightbox">
+                                <img src="instalaciones3.jpg" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="instalaciones4.jpg" class="gallery-lightbox">
+                                <img src="instalaciones4.jpg" alt="" class="img-fluid">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section><!-- End Gallery Section -->
+
+        <!-- ======= Chefs Section ======= -->
+        <section id="chefs" class="chefs">
+            <div class="container">
+
+                <div class="section-title">
+                    <h2>Nuestros <span>Empleados</span></h2>
+                    <p>Llegar juntos es el principio. Mantenerse juntos, es el progreso. Trabajar juntos es el éxito.</p>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="member">
+                            <div class="pic"><img src="Gerente General.jpg" class="img-fluid" alt=""></div>
+                            <div class="member-info">
+                                <h4>Valeria Flen</h4>
+                                <span>Gerente General</span>
+                                <div class="social">
+                                    <a href=""><i class="bi bi-twitter"></i></a>
+                                    <a href=""><i class="bi bi-facebook"></i></a>
+                                    <a href=""><i class="bi bi-instagram"></i></a>
+                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="member">
+                            <div class="pic"><img src="rodriguez-claudio.jpg" class="img-fluid" alt=""></div>
+                            <div class="member-info">
+                                <h4>Claudio Jose Rodriguez</h4>
+                                <span>Director</span>
+                                <div class="social">
+                                    <a href=""><i class="bi bi-twitter"></i></a>
+                                    <a href=""><i class="bi bi-facebook"></i></a>
+                                    <a href=""><i class="bi bi-instagram"></i></a>
+                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="member">
+                            <div class="pic"><img src="rodriguez2_.jpg" class="img-fluid" alt=""></div>
+                            <div class="member-info">
+                                <h4>Jorge Columbo Rodriguez</h4>
+                                <span>Presidente del Directorio</span>
+                                <div class="social">
+                                    <a href=""><i class="bi bi-twitter"></i></a>
+                                    <a href=""><i class="bi bi-facebook"></i></a>
+                                    <a href=""><i class="bi bi-instagram"></i></a>
+                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- End Chefs Section -->
+
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact">
+            <div class="container">
+
+                <div class="section-title">
+                    <h2><span>Contactenos</span></h2>
+                    <p>Para que seamos capaces de alcanzar los placeres y placeres de la vida.</p>
+                </div>
+            </div>
+
+            <div class="map">
+                <iframe style="border:0; width: 100%; height: 350px;"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4639.476200754437!2d-77.02550292462566!3d-12.090306812645295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c945f0df01a5%3A0xc91a9afc00f6b235!2sLeche%20Gloria%20SA!5e0!3m2!1ses-419!2spe!4v1651783428350!5m2!1ses-419!2spe"
+                        frameborder="0" allowfullscreen></iframe>
+
+            </div>
+
+            <div class="container mt-5">
+
+                <div class="info-wrap">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 info">
+                            <i class="bi bi-geo-alt"></i>
+                            <h4>Location:</h4>
+                            <p>Av. Republica de Panamá<br>Nro. 2463 en el distrito la Victoria</p>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
+                            <i class="bi bi-clock"></i>
+                            <h4>Open Hours:</h4>
+                            <p>Lunes-Viernes: 8:00 AM hasta 6:00 PM / Sábado: 8:00 AM hasta 12:00 PM</p>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
+                            <i class="bi bi-envelope"></i>
+                            <h4>Email:</h4>
+                            <p>contactcenterinforma@
+                                gloria.com.pe.</p>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 info mt-4 mt-lg-0">
+                            <i class="bi bi-phone"></i>
+                            <h4>Call:</h4>
+                            <p>0800-1-4441</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form th:action="@{/usuario/guardarContacto}" method="post" role="form">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input type="text" name="nombre" class="form-control" id="nombre" placeholder="Ingrese su nombre" required>
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Ingrese su correo" required>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="asunto" id="asunto" placeholder="Asunto" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <textarea class="form-control" name="mensaje" rows="5" placeholder="Mensaje" required></textarea>
+                    </div>
+                    <div class="text-center" style="padding: 10px 0;"><button class="btn-mensaje" type="submit"><i class="bi bi-envelope-check-fill" style="padding: 5px 5px;"></i>Enviar Mensaje</button></div>
+                </form>
+
+            </div>
+        </section><!-- End Contact Section -->
+
+
+        <!-- ======= Footer ======= -->
+        <footer id="footer">
+            <div class="container">
+                <h3>Gloria</h3>
+                <p>No busques clientes para tus productos, busca productos para tus clientes.</p>
+                <div class="social-links">
+                    <a href="https://twitter.com/leche_gloria" class="twitter"><i class="bx bxl-twitter"></i></a>
+                    <a href="https://es-la.facebook.com/GloriaPeru/" class="facebook"><i class="bx bxl-facebook"></i></a>
+                    <a href="https://www.instagram.com/gloria_peru/?hl=es" class="instagram"><i class="bx bxl-instagram"></i></a>
+                    <a href="https://www.youtube.com/channel/UCjpfosPtvFXMv4jGIDZX36A" class="google-plus"><i class="bx bxl-youtube"></i></a>
+                    <a href="https://www.linkedin.com/company/grupo-gloria/?viewAsMember=true" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                </div>
+                <div class="copyright">
+                    &copy; Copyright <strong><span>Gloria</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                    <!-- All the links in the footer should remain intact. -->
+                    <!-- You can delete the links only if you purchased the pro version. -->
+                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/delicious-free-restaurant-bootstrap-theme/ -->
+                    Designed by <a href="https://www.youtube.com/watch?v=irjtusWXjRU">Grupo 5 - Emprendedores</a>
+                </div>
+            </div>
+        </footer><!-- End Footer -->
+
+        <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+                class="bi bi-arrow-up-short"></i></a>
+
+        <!-- Vendor JS Files -->
+        <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+        <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+        <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+        <!-- Template Main JS File -->
+        <script src="main.js"></script>
+
+    </body>
+
+</html>
